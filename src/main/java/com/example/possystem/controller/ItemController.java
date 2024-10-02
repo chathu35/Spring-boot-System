@@ -1,5 +1,6 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.dto.impl.api.ItemDto;
 import com.example.possystem.entitiy.Item;
 import com.example.possystem.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,13 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping("/add")
-    public ResponseEntity<Item> addItem(@RequestBody Item item) {
-        return new ResponseEntity<>(itemService.addItem(item), HttpStatus.CREATED);
+    public ResponseEntity<ItemDto> addItem(@RequestBody ItemDto itemDto) {
+        return new ResponseEntity<>(itemService.addItem(itemDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Item> editItem(@PathVariable Long id, @RequestBody Item item) {
-        return new ResponseEntity<>(itemService.updateItem(id, item), HttpStatus.OK);
+    public ResponseEntity<ItemDto> editItem(@PathVariable Long id, @RequestBody ItemDto itemDto) {
+        return new ResponseEntity<>(itemService.updateItem(id, itemDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -30,7 +31,7 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> getItem(@PathVariable Long id) {
+    public ResponseEntity<ItemDto> getItem(@PathVariable Long id) {
         return new ResponseEntity<>(itemService.getItemById(id), HttpStatus.OK);
     }
 }

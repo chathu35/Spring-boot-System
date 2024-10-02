@@ -1,10 +1,9 @@
 package com.example.possystem.controller;
 
 
-import com.example.possystem.dto.AuthDTO;
-import com.example.possystem.dto.ResponseDTO;
-import com.example.possystem.dto.UserDTO;
-import com.example.possystem.entitiy.User;
+import com.example.possystem.dto.impl.AuthDTO;
+import com.example.possystem.dto.impl.ResponseDTO;
+import com.example.possystem.dto.impl.UserDTO;
 import com.example.possystem.service.impl.UserServiceImpl;
 import com.example.possystem.util.JwtUtil;
 import com.example.possystem.util.VarList;

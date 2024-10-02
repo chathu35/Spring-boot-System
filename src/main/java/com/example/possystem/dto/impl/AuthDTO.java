@@ -1,4 +1,4 @@
-package com.example.possystem.dto;
+package com.example.possystem.dto.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Data
 @Component
-public class ResponseDTO {
-    private int code;
-    private String message;
-    private Object data;
+public class AuthDTO {
+    private String email;
+    private String token;
+    private String refreshToken;
 }

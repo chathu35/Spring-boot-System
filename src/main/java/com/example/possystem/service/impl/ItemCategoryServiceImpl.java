@@ -1,10 +1,12 @@
 package com.example.possystem.service.impl;
 
+import com.example.possystem.dto.impl.api.ItemCategoryDto;
 import com.example.possystem.entitiy.ItemCategory;
 import com.example.possystem.repository.ItemCategoryRepository;
 import com.example.possystem.service.ItemCategoryService;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,12 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     @Autowired
     private ItemCategoryRepository categoryRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public ItemCategory addCategory(ItemCategory category) {
-        return categoryRepository.save(category);
+    public ItemCategoryDto addCategory(ItemCategoryDto category) {
+        return modelMapper.map(categoryRepository.save(modelMapper.map(category,ItemCategory.class)),ItemCategoryDto.class);
     }
 
     @Override

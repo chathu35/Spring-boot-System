@@ -1,6 +1,7 @@
 package com.example.possystem.controller;
 
 
+import com.example.possystem.dto.impl.api.ItemCategoryDto;
 import com.example.possystem.entitiy.ItemCategory;
 import com.example.possystem.service.ItemCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class ItemCategoryController {
 
     // Create Category
     @PostMapping
-    public ResponseEntity<ItemCategory> createCategory(@RequestBody ItemCategory category) {
-        ItemCategory newCategory = categoryService.addCategory(category);
+    public ResponseEntity<ItemCategoryDto> createCategory(@RequestBody ItemCategoryDto category) {
+        ItemCategoryDto newCategory = categoryService.addCategory(category);
         return ResponseEntity.ok(newCategory);
     }
 

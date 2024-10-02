@@ -1,7 +1,7 @@
 package com.example.possystem.service.impl;
 
-import com.example.possystem.dto.CartRequest;
-import com.example.possystem.dto.InvoiceRequest;
+import com.example.possystem.dto.impl.CartRequest;
+import com.example.possystem.dto.impl.InvoiceRequest;
 import com.example.possystem.repository.StockRepository;
 import com.example.possystem.service.POSService;
 
