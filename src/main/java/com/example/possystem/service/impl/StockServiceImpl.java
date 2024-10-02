@@ -1,11 +1,13 @@
 package com.example.possystem.service.impl;
 
+import com.example.possystem.dto.impl.api.StockDto;
 import com.example.possystem.entitiy.Item;
 import com.example.possystem.entitiy.Stock;
 import com.example.possystem.repository.ItemRepository;
 import com.example.possystem.repository.StockRepository;
 import com.example.possystem.service.StockService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,25 +22,28 @@ public class StockServiceImpl implements StockService {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
-    public Stock addStock(Stock stock) {
+    public StockDto addStock(StockDto stockDto) {
         // Ensure the item exists in the database
-        Item item = itemRepository.findById(stock.getItem().getId())
+        Item item = itemRepository.findById(stockDto.getItem().getId())
                 .orElseThrow(() -> new RuntimeException("Item not found"));
 
         // Set the item in stock to maintain the relationship
-        stock.setItem(item);
+        stockDto.setItem(item);
 
         // Check if the stock already exists
-        Stock existingStock = stockRepository.findByItemId(stock.getItem().getId());
+        Stock existingStock = stockRepository.findByItemId(stockDto.getItem().getId());
         if (existingStock != null) {
             // Update existing stock
-            existingStock.setQuantity(stock.getQuantity());
-            return stockRepository.save(existingStock);
+            existingStock.setQuantity(stockDto.getQuantity());
+            return modelMapper.map(stockRepository.save(existingStock),StockDto.class);
         }
 
         // Save the new stock
-        return stockRepository.save(stock);
+        return modelMapper.map(stockRepository.save(modelMapper.map(stockDto,Stock.class)),StockDto.class);
     }
 
 

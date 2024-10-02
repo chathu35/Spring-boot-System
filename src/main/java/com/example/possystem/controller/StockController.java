@@ -1,5 +1,6 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.dto.impl.api.StockDto;
 import com.example.possystem.entitiy.Stock;
 import com.example.possystem.service.StockService;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class StockController {
     private StockService stockService;
 
     @PostMapping("/add")
-    public ResponseEntity<Stock> addStock(@RequestBody Stock stock) {
+    public ResponseEntity<StockDto> addStock(@RequestBody StockDto stock) {
         return new ResponseEntity<>(stockService.addStock(stock), HttpStatus.CREATED);
     }
 
