@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface StockService {
     StockDto addStock(StockDto stock);
-    Stock updateStock(Long itemId, Stock stock);
-    Stock getStockByItemId(Long itemId);
-    List<Stock> getAllStock();
+    StockDto updateStock(Long itemId, StockDto stock);
+    StockDto getStockByItemId(Long itemId);
+    List<StockDto> getAllStock();
 }
 

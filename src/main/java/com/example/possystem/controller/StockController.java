@@ -22,12 +22,12 @@ public class StockController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody Stock stock) {
+    public ResponseEntity<StockDto> updateStock(@PathVariable Long id, @RequestBody StockDto stock) {
         return new ResponseEntity<>(stockService.updateStock(id, stock), HttpStatus.OK);
     }
 
     @GetMapping("/retrieve/{id}")
-    public ResponseEntity<Stock> getStock(@PathVariable Long id) {
+    public ResponseEntity<StockDto> getStock(@PathVariable Long id) {
         return new ResponseEntity<>(stockService.getStockByItemId(id), HttpStatus.OK);
     }
 }

@@ -50,24 +50,24 @@ public class StockServiceImpl implements StockService {
 
 
     @Override
-    public Stock updateStock(Long itemId, Stock stock) {
+    public StockDto updateStock(Long itemId, StockDto stock) {
         Optional<Stock> existingStock = stockRepository.findById(itemId);
         if (existingStock.isPresent()) {
             Stock updatedStock = existingStock.get();
             updatedStock.setQuantity(stock.getQuantity());
-            return stockRepository.save(updatedStock);
+            return modelMapper.map(stockRepository.save(updatedStock),StockDto.class);
         }
         throw new RuntimeException("Stock not found");
     }
 
     @Override
-    public Stock getStockByItemId(Long itemId) {
-        return stockRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Stock not found"));
+    public StockDto getStockByItemId(Long itemId) {
+        return modelMapper.map(stockRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Stock not found")),StockDto.class);
     }
 
     @Override
-    public List<Stock> getAllStock() {
-        return stockRepository.findAll();
+    public List<StockDto> getAllStock() {
+        return modelMapper.map(stockRepository.findAll(),List.class);
     }
 }
 
