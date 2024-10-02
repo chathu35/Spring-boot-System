@@ -1,4 +1,7 @@
 package com.example.possystem.repository;
 
-public class ItemCategoryRepository {
-}
+import com.example.possystem.entitiy.ItemCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Long> {}
+
