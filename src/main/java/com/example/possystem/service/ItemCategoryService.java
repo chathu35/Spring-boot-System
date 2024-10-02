@@ -1,15 +1,16 @@
 package com.example.possystem.service;
 
 
+import com.example.possystem.dto.impl.api.ItemCategoryDto;
 import com.example.possystem.entitiy.ItemCategory;
 
 import java.util.List;
 
 public interface ItemCategoryService {
-    ItemCategory addCategory(ItemCategory category);
-    ItemCategory updateCategory(Long id, ItemCategory category);
+    ItemCategoryDto addCategory(ItemCategoryDto category);
+    ItemCategoryDto updateCategory(Long id, ItemCategoryDto category);
     void deleteCategory(Long id);
-    List<ItemCategory> getAllCategories();
-    ItemCategory getCategoryById(Long id);
+    List<ItemCategoryDto> getAllCategories();
+    ItemCategoryDto getCategoryById(Long id);
 }
 

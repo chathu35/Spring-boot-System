@@ -1,7 +1,6 @@
 package com.example.possystem.service;
 
-import com.example.possystem.dto.UserDTO;
-import com.example.possystem.entitiy.User;
+import com.example.possystem.dto.impl.UserDTO;
 
 public interface UserService {
     int saveUser(UserDTO userDTO);

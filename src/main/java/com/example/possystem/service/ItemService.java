@@ -1,14 +1,15 @@
 package com.example.possystem.service;
 
 
+import com.example.possystem.dto.impl.api.ItemDto;
 import com.example.possystem.entitiy.Item;
 
 import java.util.List;
 
 public interface ItemService {
-    Item addItem(Item item);
-    Item updateItem(Long id, Item item);
+    ItemDto addItem(ItemDto itemDto);
+    ItemDto updateItem(Long id, ItemDto itemDto);
     void deleteItem(Long id);
-    Item getItemById(Long id);
-    List<Item> getAllItems();
+    ItemDto getItemById(Long id);
+    List<ItemDto> getAllItems();
 }

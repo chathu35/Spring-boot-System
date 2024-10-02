@@ -1,12 +1,13 @@
 package com.example.possystem.service.impl;
 
+import com.example.possystem.dto.impl.api.ItemDto;
 import com.example.possystem.entitiy.Item;
 import com.example.possystem.repository.ItemCategoryRepository;
 import com.example.possystem.repository.ItemRepository;
 import com.example.possystem.service.ItemService;
 
 
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,12 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemCategoryRepository categoryRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public Item addItem(Item item) {
+    public ItemDto addItem(ItemDto itemDto) {
+        Item item = modelMapper.map(itemDto, Item.class);
         // Ensure category exists and is set correctly
         item.setCategory(categoryRepository.findById(item.getCategory().getId())
                 .orElseThrow(() -> new RuntimeException("Category not found")));
@@ -34,14 +39,14 @@ public class ItemServiceImpl implements ItemService {
         }
 
         // Save the item, which will also save the stock due to CascadeType.ALL
-        Item save = itemRepository.save(item);
-        System.out.println(save);
-        return save;
+        Item saveitem = itemRepository.save(item);
+        return modelMapper.map(saveitem, ItemDto.class);
     }
 
 
     @Override
-    public Item updateItem(Long id, Item item) {
+    public ItemDto updateItem(Long id, ItemDto itemDto) {
+        Item item = modelMapper.map(itemDto, Item.class);
         Optional<Item> existingItem = itemRepository.findById(id);
         if (existingItem.isPresent()) {
             Item updatedItem = existingItem.get();
@@ -49,7 +54,7 @@ public class ItemServiceImpl implements ItemService {
             updatedItem.setPrice(item.getPrice());
             updatedItem.setDescription(item.getDescription());
             updatedItem.setCategory(item.getCategory());
-            return itemRepository.save(updatedItem);
+            return modelMapper.map(itemRepository.save(updatedItem), ItemDto.class);
         }
         throw new RuntimeException("Item not found");
     }
@@ -60,13 +65,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item getItemById(Long id) {
-        return itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item not found"));
+    public ItemDto getItemById(Long id) {
+        return modelMapper.map(itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item not found")),
+                ItemDto.class);
     }
 
     @Override
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
+    public List<ItemDto> getAllItems() {
+        return modelMapper.map(itemRepository.findAll(),List.class);
     }
 }
 

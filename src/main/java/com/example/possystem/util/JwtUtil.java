@@ -1,8 +1,7 @@
 package com.example.possystem.util;
 
 
-import com.example.possystem.dto.UserDTO;
-import com.example.possystem.entitiy.User;
+import com.example.possystem.dto.impl.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

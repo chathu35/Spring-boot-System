@@ -1,10 +1,12 @@
 package com.example.possystem.service.impl;
 
+import com.example.possystem.dto.impl.api.ItemCategoryDto;
 import com.example.possystem.entitiy.ItemCategory;
 import com.example.possystem.repository.ItemCategoryRepository;
 import com.example.possystem.service.ItemCategoryService;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +19,21 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     @Autowired
     private ItemCategoryRepository categoryRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public ItemCategory addCategory(ItemCategory category) {
-        return categoryRepository.save(category);
+    public ItemCategoryDto addCategory(ItemCategoryDto category) {
+        return modelMapper.map(categoryRepository.save(modelMapper.map(category,ItemCategory.class)),ItemCategoryDto.class);
     }
 
     @Override
-    public ItemCategory updateCategory(Long id, ItemCategory category) {
+    public ItemCategoryDto updateCategory(Long id, ItemCategoryDto category) {
         Optional<ItemCategory> existingCategory = categoryRepository.findById(id);
         if (existingCategory.isPresent()) {
             ItemCategory updatedCategory = existingCategory.get();
             updatedCategory.setCategoryName(category.getCategoryName());
-            return categoryRepository.save(updatedCategory);
+            return modelMapper.map(categoryRepository.save(updatedCategory),ItemCategoryDto.class);
         }
         throw new RuntimeException("Category not found");
     }
@@ -39,13 +44,14 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     }
 
     @Override
-    public List<ItemCategory> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<ItemCategoryDto> getAllCategories() {
+        return modelMapper.map(categoryRepository.findAll(),List.class);
     }
 
     @Override
-    public ItemCategory getCategoryById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+    public ItemCategoryDto getCategoryById(Long id) {
+        return modelMapper.map(categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"))
+                ,ItemCategoryDto.class);
     }
 }
 

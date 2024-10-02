@@ -1,7 +1,7 @@
 package com.example.possystem.service.impl;
 
 
-import com.example.possystem.dto.UserDTO;
+import com.example.possystem.dto.impl.UserDTO;
 import com.example.possystem.entitiy.User;
 import com.example.possystem.repository.UserRepository;
 import com.example.possystem.service.UserService;
