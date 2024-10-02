@@ -28,12 +28,12 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     }
 
     @Override
-    public ItemCategory updateCategory(Long id, ItemCategory category) {
+    public ItemCategoryDto updateCategory(Long id, ItemCategoryDto category) {
         Optional<ItemCategory> existingCategory = categoryRepository.findById(id);
         if (existingCategory.isPresent()) {
             ItemCategory updatedCategory = existingCategory.get();
             updatedCategory.setCategoryName(category.getCategoryName());
-            return categoryRepository.save(updatedCategory);
+            return modelMapper.map(categoryRepository.save(updatedCategory),ItemCategoryDto.class);
         }
         throw new RuntimeException("Category not found");
     }
@@ -44,13 +44,14 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     }
 
     @Override
-    public List<ItemCategory> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<ItemCategoryDto> getAllCategories() {
+        return modelMapper.map(categoryRepository.findAll(),List.class);
     }
 
     @Override
-    public ItemCategory getCategoryById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+    public ItemCategoryDto getCategoryById(Long id) {
+        return modelMapper.map(categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"))
+                ,ItemCategoryDto.class);
     }
 }
 
