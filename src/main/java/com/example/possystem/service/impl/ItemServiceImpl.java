@@ -7,6 +7,7 @@ import com.example.possystem.repository.ItemRepository;
 import com.example.possystem.service.ItemService;
 
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService {
 
     @Autowired

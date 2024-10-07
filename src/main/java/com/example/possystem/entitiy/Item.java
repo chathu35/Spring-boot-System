@@ -25,7 +25,6 @@ public class Item {
 
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    @JsonManagedReference
     private Stock stock;
 
     // Utility method to manage bidirectional relationship
