@@ -1,5 +1,6 @@
 package com.example.possystem.controller;
 
+import com.example.possystem.dto.impl.api.StockDto;
 import com.example.possystem.entitiy.Stock;
 import com.example.possystem.service.StockService;
 import org.springframework.http.HttpStatus;
@@ -16,17 +17,17 @@ public class StockController {
     private StockService stockService;
 
     @PostMapping("/add")
-    public ResponseEntity<Stock> addStock(@RequestBody Stock stock) {
+    public ResponseEntity<StockDto> addStock(@RequestBody StockDto stock) {
         return new ResponseEntity<>(stockService.addStock(stock), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody Stock stock) {
+    public ResponseEntity<StockDto> updateStock(@PathVariable Long id, @RequestBody StockDto stock) {
         return new ResponseEntity<>(stockService.updateStock(id, stock), HttpStatus.OK);
     }
 
     @GetMapping("/retrieve/{id}")
-    public ResponseEntity<Stock> getStock(@PathVariable Long id) {
+    public ResponseEntity<StockDto> getStock(@PathVariable Long id) {
         return new ResponseEntity<>(stockService.getStockByItemId(id), HttpStatus.OK);
     }
 }
